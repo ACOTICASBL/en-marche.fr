@@ -1,0 +1,69 @@
+{% extends 'referent/_layout.html.twig' %}
+
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/sonataadmin/vendor/jqueryui/themes/base/minified/jquery-ui.min.css') }}" />
+{% endblock %}
+
+{% block javascripts %}
+    {% import 'javascript.js.twig' as js %}
+    {{ parent() }}
+    <script type="text/javascript" src={{ asset('bundles/sonataadmin/vendor/jquery/dist/jquery.min.js') }}></script>
+    <script type="text/javascript" src={{ asset('bundles/sonataadmin/vendor/jqueryui/ui/jquery-ui.js') }}></script>
+    <script src="{{ asset('js/jquery.collection.js') }}"></script>
+
+    <script type="text/javascript">
+        Kernel.onLoad(function() {
+            $('.survey-questions-collection').collection({
+                prefix: 'question',
+                allow_add: false,
+                allow_up: false,
+                allow_down: false,
+                allow_remove: false,
+                custom_add_location: true,
+                drag_drop: false,
+                position_field_selector: '.questions-position',
+                children: [{
+                    prefix: 'choice',
+                    allow_add: false,
+                    allow_up: false,
+                    allow_down: false,
+                    allow_remove: false,
+                    selector: '.survey-questions-choices-collection',
+                    position_field_selector: '.choices-position',
+                }]
+            });
+        });
+
+        const displayChoices = function(questionType) {
+            if ('{{ constant('AppBundle\\Jecoute\\SurveyQuestionTypeEnum::SIMPLE_FIELD') }}' === $(questionType).val()) {
+                $(questionType).parents('.survey-question-type').nextAll('.question-choices').hide();
+            } else {
+                $(questionType).parents('.survey-question-type').nextAll('.question-choices').show();
+            }
+        };
+
+        $('.survey-question-type input:checked').each(function() {
+            displayChoices($(this));
+        });
+    </script>
+{% endblock %}
+
+{% block referent_content %}
+
+    {% form_theme form with ['jquery.collection.html.twig','referent/_form_theme.html.twig'] %}
+
+    <a href="{{ path('app_referent_national_surveys') }}" class="back-to-list icon--with-text b__nudge--top-15 b__nudge--bottom">
+        {{ include('components/caret--left.html.twig') }}
+        Retour à la liste des questionnaires nationaux
+    </a>
+
+    <hr />
+
+    <div class="jecoute-survey l__wrapper--slim">
+        {{ form_start(form, { attr: { class: 'b__nudge--top-40' } }) }}
+        {{ include('referent/surveys/_national_surveys_form.html.twig') }}
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %}

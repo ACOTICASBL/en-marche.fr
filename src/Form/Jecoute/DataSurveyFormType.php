@@ -7,7 +7,7 @@ use AppBundle\Entity\Jecoute\Survey;
 use AppBundle\Jecoute\AgeRangeEnum;
 use AppBundle\Jecoute\GenderEnum;
 use AppBundle\Jecoute\ProfessionEnum;
-use AppBundle\Repository\Jecoute\SurveyRepository;
+use AppBundle\Repository\Jecoute\LocalSurveyRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -33,8 +33,8 @@ class DataSurveyFormType extends AbstractType
         $builder
             ->add('survey', EntityType::class, [
                 'class' => Survey::class,
-                'query_builder' => function (SurveyRepository $repository) {
-                    return $repository->createSurveysForAdherentQueryBuilder($this->user);
+                'query_builder' => function (LocalSurveyRepository $localSurveyRepository) {
+                    return $localSurveyRepository->createSurveysForAdherentQueryBuilder($this->user);
                 },
             ])
             ->add('lastName', TextType::class, [
