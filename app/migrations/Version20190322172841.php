@@ -5,14 +5,14 @@ namespace Migrations;
 use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
-final class Version20190322172056 extends AbstractMigration
+final class Version20190322172841 extends AbstractMigration
 {
     public function up(Schema $schema): void
     {
         $this->addSql('CREATE TABLE assessor_request (
           id INT AUTO_INCREMENT NOT NULL, 
           last_name VARCHAR(50) NOT NULL, 
-          first_names VARCHAR(100) NOT NULL, 
+          first_name VARCHAR(100) NOT NULL, 
           birth_name VARCHAR(50) DEFAULT NULL, 
           birthdate DATE NOT NULL, 
           birth_city VARCHAR(15) NOT NULL, 
@@ -22,7 +22,7 @@ final class Version20190322172056 extends AbstractMigration
           vote_city VARCHAR(15) NOT NULL, 
           office_number VARCHAR(10) NOT NULL, 
           email_address VARCHAR(255) NOT NULL, 
-          phone VARCHAR(35) DEFAULT NULL COMMENT \'(DC2Type:phone_number)\', 
+          phone VARCHAR(35) NOT NULL COMMENT \'(DC2Type:phone_number)\', 
           assessor_city VARCHAR(15) NOT NULL, 
           office VARCHAR(15) NOT NULL, 
           created_at DATETIME NOT NULL, 

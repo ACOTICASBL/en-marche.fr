@@ -54,7 +54,7 @@ class AssessorRequest
      *     maxMessage="assessor.first_name.max_length"
      * )
      */
-    private $firstNames = '';
+    private $firstName = '';
 
     /**
      * @var string|null
@@ -81,7 +81,7 @@ class AssessorRequest
     private $birthdate;
 
     /**
-     * @var string|null
+     * @var string
      *
      * @ORM\Column(length=15)
      *
@@ -146,12 +146,12 @@ class AssessorRequest
      * @Assert\Email(message="common.email.invalid")
      * @Assert\Length(max=255, maxMessage="common.email.max_length")
      */
-    private $emailAddress = '';
+    private $emailAddress;
 
     /**
      * @var PhoneNumber
      *
-     * @ORM\Column(type="phone_number", nullable=true)
+     * @ORM\Column(type="phone_number")
      *
      * @Assert\NotBlank(message="common.phone_number.required")
      * @AssertPhoneNumber(defaultRegion="FR")
@@ -163,7 +163,7 @@ class AssessorRequest
      *
      * @ORM\Column(length=15)
      *
-     * @Assert\NotBlank(message="assessor.vote_city.not_blank")
+     * @Assert\NotBlank(message="assessor.assessor_city.not_blank")
      * @Assert\Length(max=15)
      */
     private $assessorCity;
@@ -173,7 +173,7 @@ class AssessorRequest
      *
      * @ORM\Column(length=15)
      *
-     * @Assert\NotBlank(message="common.gender.invalid_choice", groups={"election_rounds"})
+     * @Assert\NotBlank(message="assessor.office.invalid_choice")
      * @Assert\Choice(
      *     callback={"AppBundle\Entity\AssessorOfficeEnum", "toArray"},
      *     message="assessor.office.invalid_choice",
