@@ -84,10 +84,11 @@ class ImportVotePlacesCommand extends ContainerAwareCommand
 
             if (!empty($row[9])) {
                 $rows[] = [
-                  'code_postal' => $row[4],
-                  'nom_commune_bdv' => $row[6],
-                  'nom_bdv' => $row[9],
-                  'adresse_bdv' => $row[10],
+                    'code_postal' => $row[4],
+                    'nom_commune_bdv' => $row[6],
+                    'code_bdv' => $row[8],
+                    'nom_bdv' => $row[9],
+                    'adresse_bdv' => $row[10],
                 ];
             }
         }
@@ -100,12 +101,7 @@ class ImportVotePlacesCommand extends ContainerAwareCommand
     private function createAndPersistVotePlace(array $rows): void
     {
         foreach ($rows as $row) {
-            if ($this->em->getRepository(VotePlace::class)->findOneBy([
-                'name' => $row['nom_bdv'],
-                'address' => $row['adresse_bdv'],
-                'postalCode' => $row['code_postal'],
-                'city' => $row['nom_commune_bdv'],
-            ])) {
+            if ($this->em->getRepository(VotePlace::class)->findOneByCode($row['code_bdv'])) {
                 continue;
             }
 
@@ -117,9 +113,11 @@ class ImportVotePlacesCommand extends ContainerAwareCommand
                 : $row['code_postal']
             );
             $votePlace->setCity($row['nom_commune_bdv']);
+            $votePlace->setCode($row['code_bdv']);
 
             $this->em->persist($votePlace);
         }
+
         $this->em->flush();
     }
 }
