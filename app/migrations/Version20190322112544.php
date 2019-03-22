@@ -14,7 +14,7 @@ final class Version20190322112544 extends AbstractMigration
           name VARCHAR(255) NOT NULL, 
           address VARCHAR(150) NOT NULL, 
           postal_code VARCHAR(15) DEFAULT NULL, 
-          city_insee VARCHAR(15) DEFAULT NULL, 
+          city_insee VARCHAR(43) DEFAULT NULL, 
           country VARCHAR(2) NOT NULL, 
           created_at DATETIME NOT NULL, 
           updated_at DATETIME NOT NULL, 

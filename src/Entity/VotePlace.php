@@ -60,9 +60,9 @@ class VotePlace
     /**
      * @var string|null
      *
-     * @ORM\Column(name="city_insee", length=15, nullable=true)
+     * @ORM\Column(name="city_insee", length=43, nullable=true)
      *
-     * @Assert\Length(max=15)
+     * @Assert\Length(max=43)
      */
     private $city;
 
@@ -74,7 +74,7 @@ class VotePlace
      * @Assert\NotBlank
      * @AssertUnitedNationsCountry(message="common.country.invalid")
      */
-    private $country;
+    private $country = 'FR';
 
     public function __toString(): string
     {
