@@ -322,7 +322,7 @@ assessor.last_name.min_length: Votre nom doit comporter au moins 2 caractères.
 assessor.last_name.max_length: Vos nom ne peuvent pas dépasser 100 caractères.
 
 assessor.birthdate.not_blank: Vous devez spécifier votre date de naissance.
-assessor.birthdate.minimum_required_age: Vous devez être âgé d'au moins 17 ans pour demander une procuration.
+assessor.birthdate.minimum_required_age: Vous devez être âgé d'au moins 30 ans pour être assesseur.
 
 assessor.office.invalid_choice: Vous devez choisir l'une des fonctions proposées.
 
